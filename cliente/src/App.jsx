@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar';
 import { motion } from 'framer-motion';
+import ProjectGrid from './components/ProjectGrid';
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
           </motion.button>
         </motion.div>
       </section>
+
+      <ProjectGrid />
     </div>
   );
 }
