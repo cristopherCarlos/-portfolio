@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, Briefcase, Folder, Wrench, Mail } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Constants
 const ICON_SIZE = 20;
@@ -46,20 +47,21 @@ const NavItem = ({ item }) => {
       </AnimatePresence>
 
       {/* Icon Button */}
-      <motion.a
-        href={item.href}
+      <motion.div
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.9 }}
         className="flex items-center justify-center w-12 h-12"
         aria-label={item.name}
       >
-        <motion.div
-          animate={{ color: isHovered ? ACCENT_COLOR : SLATE_COLOR }}
-          transition={{ duration: 0.2 }}
-        >
-          {item.icon}
-        </motion.div>
-      </motion.a>
+        <Link to={item.to}>
+          <motion.div
+            animate={{ color: isHovered ? ACCENT_COLOR : SLATE_COLOR }}
+            transition={{ duration: 0.2 }}
+          >
+            {item.icon}
+          </motion.div>
+        </Link>
+      </motion.div>
 
       {/* Indicador de punto inferior */}
       {/* <AnimatePresence>
@@ -79,11 +81,11 @@ const NavItem = ({ item }) => {
 
 const Navbar = () => {
   const navItems = useMemo(() => [
-    { name: 'Inicio', icon: <Home size={ICON_SIZE} />, href: '#' },
-    { name: 'Proyectos', icon: <Folder size={ICON_SIZE} />, href: '#proyectos' },
-    { name: 'experiencia', icon: <Briefcase size={ICON_SIZE} />, href: '#sobre-mi' },
-    { name: 'herramientas', icon: <Wrench size={ICON_SIZE} />, href: '#herramientas' },
-    { name: 'Contacto', icon: <Mail size={ICON_SIZE} />, href: '#contacto' },
+    { name: 'Inicio', icon: <Home size={ICON_SIZE} />, to: '/' },
+    { name: 'Proyectos', icon: <Folder size={ICON_SIZE} />, to: '/proyectos' },
+    { name: 'Experiencia', icon: <Briefcase size={ICON_SIZE} />, to: '/experiencia' },
+    { name: 'Herramientas', icon: <Wrench size={ICON_SIZE} />, to: '/herramientas' },
+    { name: 'Contacto', icon: <Mail size={ICON_SIZE} />, to: '/contacto' },
   ], []);
 
   return (
